@@ -1,0 +1,68 @@
+{
+  "currentUser": {
+    "image": { 
+      "png": "./images/avatars/image-shubham.png",
+      "webp": "./images/avatars/image-shubham.webp"
+    },
+    "username": "Shubham"
+  },
+  "comments": [
+    {
+      "id": 1,
+      "content": "The exam portal is very efficient! I think the instructions before each test could be a bit clearer, but overall, the design and the timed exam feature work really well.",
+      "createdAt": "1 month ago",
+      "score": 14,
+      "user": {
+        "image": { 
+          "png": "./images/avatars/image-jibitesh.png",
+          "webp": "./images/avatars/image-jibitesh.webp"
+        },
+        "username": "Jibitesh"
+      },
+      "replies": []
+    },
+    {
+      "id": 2,
+      "content": "This platform is excellent! How long did it take to build? I’m just starting out in web development and was wondering if you have any advice on where to begin?",
+      "createdAt": "2 weeks ago",
+      "score": 9,
+      "user": {
+        "image": { 
+          "png": "./images/avatars/image-amitkumar.png",
+          "webp": "./images/avatars/image-amitkumar.webp"
+        },
+        "username": "Amit Kumar"
+      },
+      "replies": [
+        {
+          "id": 3,
+          "content": "If you're new, start with the basics of HTML, CSS, and JavaScript. A strong foundation will make it easier to learn frameworks like React down the line!",
+          "createdAt": "1 week ago",
+          "score": 7,
+          "replyingTo": "Amit Kumar",
+          "user": {
+            "image": { 
+              "png": "./images/avatars/image-jibitesh.png",
+              "webp": "./images/avatars/image-jibitesh.webp"
+            },
+            "username": "Jibitesh"
+          }
+        },
+        {
+          "id": 4,
+          "content": "I totally agree, Jibitesh! Mastering the fundamentals first makes everything easier. There’s always something new in tech, but HTML, CSS, and JS are essential.",
+          "createdAt": "2 days ago",
+          "score": 3,
+          "replyingTo": "Jibitesh",
+          "user": {
+            "image": { 
+              "png": "./images/avatars/image-shubham.png",
+              "webp": "./images/avatars/image-shubham.webp"
+            },
+            "username": "Shubham"
+          }
+        }
+      ]
+    }
+  ]
+}
