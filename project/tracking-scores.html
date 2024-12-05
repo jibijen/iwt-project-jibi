@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Tracker</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #8e2de2, #4a00e0);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background: #fff;
+            color: #333;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            border: 1px solid #ccc;
+            text-align: center;
+        }
+
+        th {
+            background-color: #6a11cb;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        tr:hover {
+            background-color: #e0e0e0;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 1rem;
+            color: #fff;
+            background: #6a11cb;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #4a00e0;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Score Tracker</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>Test Name</th>
+                <th>Score</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="score-table">
+            <!-- Scores will be dynamically inserted here -->
+        </tbody>
+    </table>
+    <button onclick="window.location.href='index.html'">Go to Home</button>
+</body>
+
+<script>
+    // Mock Data: Replace with actual data from local storage or backend
+    const scores = JSON.parse(localStorage.getItem("scoreTracker")) || [];
+
+    const tableBody = document.getElementById("score-table");
+    scores.forEach((score) => {
+        const row = document.createElement("tr");
+        row.innerHTML = `
+            <td>${score.testName}</td>
+            <td>${score.marks}</td>
+            <td>${score.date}</td>
+        `;
+        tableBody.appendChild(row);
+    });
+
+    // Example to add a new entry (You can save this in localStorage after the test)
+    function addScore(testName, marks) {
+        const newScore = {
+            testName: testName,
+            marks: marks,
+            date: new Date().toLocaleDateString()
+        };
+        scores.push(newScore);
+        localStorage.setItem("scoreTracker", JSON.stringify(scores));
+    }
+</script>
+
+</html>

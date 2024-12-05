@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saved Questions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: #fff;
+            text-align: center;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            background: #fff;
+            color: #333;
+            padding: 15px;
+            margin: 10px auto;
+            width: 80%;
+            border-radius: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+
+        button {
+            padding: 5px 10px;
+            font-size: 1rem;
+            color: #fff;
+            background: #e53935;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #b71c1c;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Saved Questions</h1>
+    <ul id="saved-questions">
+        <!-- Dynamically filled with saved questions -->
+    </ul>
+</body>
+
+<script>
+    // Load saved questions from localStorage
+    const savedQuestions = JSON.parse(localStorage.getItem("savedQuestions")) || [];
+    const ul = document.getElementById("saved-questions");
+
+    // Display each saved question
+    function renderSavedQuestions() {
+        ul.innerHTML = ""; // Clear the list
+        savedQuestions.forEach((q, index) => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <span>${q.question} - Answered: ${q.selected}</span>
+                <button onclick="deleteQuestion(${index})">Delete</button>
+            `;
+            ul.appendChild(li);
+        });
+    }
+
+    // Delete a saved question
+    function deleteQuestion(index) {
+        savedQuestions.splice(index, 1); // Remove from array
+        localStorage.setItem("savedQuestions", JSON.stringify(savedQuestions)); // Update localStorage
+        renderSavedQuestions(); // Re-render the list
+    }
+
+    // Initial render
+    renderSavedQuestions();
+</script>
+
+</html>
