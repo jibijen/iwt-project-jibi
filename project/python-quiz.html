@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz</title>
+    <style>
+        /* General Reset */
+        body,
+        h1,
+        div,
+        button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .user-section img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar .user-section a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            background-color: #ff4c4c;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar .user-section a:hover {
+            background-color: #e04343;
+        }
+
+        /* Main Content */
+        h1 {
+            text-align: center;
+            color: #0056b3;
+            margin-top: 20px;
+        }
+
+        #timer {
+            text-align: center;
+            font-size: 18px;
+            margin: 20px 0;
+            color: #ff4c4c;
+            font-weight: bold;
+        }
+
+        #quiz-container {
+            max-width: 800px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        #quiz-container div {
+            margin-bottom: 15px;
+        }
+
+        .options {
+            margin-top: 10px;
+        }
+
+        .options label {
+            display: block;
+            margin-bottom: 8px;
+        }
+
+        /* Button Group */
+        button {
+            font-size: 16px;
+            color: white;
+            background-color: #0056b3;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+            transition: background-color 0.3s;
+        }
+
+        button:hover {
+            background-color: #004494;
+        }
+
+        #submit {
+            background-color: #4CAF50;
+        }
+
+        #submit:hover {
+            background-color: #3e8e41;
+        }
+    </style>
+    <script defer>
+        document.addEventListener('DOMContentLoaded', () => {
+            const questions = [
+                {
+                    question: "What is Python?",
+                    options: ["A programming language", "A snake", "A database", "A car brand"],
+                    correct: 0
+                },
+                {
+                    question: "Which of the following is a Python data type?",
+                    options: ["int", "string", "float", "All of the above"],
+                    correct: 3
+                },
+                {
+                    question: "What is the result of 3 * 4 in Python?",
+                    options: ["7", "12", "34", "None of the above"],
+                    correct: 1
+                },
+                {
+                    question: "Which function is used to get the length of a string?",
+                    options: ["str.length()", "length()", "len()", "str.size()"],
+                    correct: 2
+                },
+                {
+                    question: "Which Python keyword is used to handle exceptions?",
+                    options: ["try", "catch", "except", "throw"],
+                    correct: 2
+                }
+            ];
+
+            let currentQuestionIndex = 0;
+            let userAnswers = [];
+            let timeLeft = 5 * 60; // 5 minutes in seconds
+            let timerInterval;
+
+            const questionElement = document.getElementById('question');
+            const optionsContainer = document.getElementById('quiz-container');
+            const prevButton = document.getElementById('prev');
+            const nextButton = document.getElementById('next');
+            const saveButton = document.getElementById('save');
+            const submitButton = document.getElementById('submit');
+            const timerElement = document.getElementById('timer');
+
+            // Timer countdown function
+            const startTimer = () => {
+                timerInterval = setInterval(() => {
+                    if (timeLeft <= 0) {
+                        clearInterval(timerInterval);
+                        alert("Time's up!");
+                        submitQuiz();
+                    } else {
+                        const minutes = Math.floor(timeLeft / 60);
+                        const seconds = timeLeft % 60;
+                        timerElement.textContent = `Time Left: ${minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+                        timeLeft--;
+                    }
+                }, 1000);
+            };
+
+            const loadQuestion = () => {
+                const question = questions[currentQuestionIndex];
+                questionElement.textContent = `Question ${currentQuestionIndex + 1}: ${question.question}`;
+                optionsContainer.innerHTML = '';
+                const optionsDiv = document.createElement('div');
+                optionsDiv.classList.add('options');
+                question.options.forEach((option, index) => {
+                    const optionLabel = document.createElement('label');
+                    optionLabel.innerHTML = `<input type="radio" name="option" value="${index}"> ${option}`;
+                    optionsDiv.appendChild(optionLabel);
+                });
+                optionsContainer.appendChild(optionsDiv);
+            };
+
+            const updateButtons = () => {
+                prevButton.disabled = currentQuestionIndex === 0;
+                nextButton.disabled = currentQuestionIndex === questions.length - 1;
+            };
+
+            const submitQuiz = () => {
+                const selectedOption = document.querySelector('input[name="option"]:checked');
+                if (selectedOption) {
+                    userAnswers[currentQuestionIndex] = parseInt(selectedOption.value);
+                }
+                let score = 0;
+                questions.forEach((question, index) => {
+                    if (userAnswers[index] === question.correct) {
+                        score++;
+                    }
+                });
+                alert(`You scored ${score} out of ${questions.length}`);
+            };
+
+            prevButton.addEventListener('click', () => {
+                if (currentQuestionIndex > 0) currentQuestionIndex--;
+                loadQuestion();
+                updateButtons();
+            });
+
+            nextButton.addEventListener('click', () => {
+                if (currentQuestionIndex < questions.length - 1) currentQuestionIndex++;
+                loadQuestion();
+                updateButtons();
+            });
+
+            saveButton.addEventListener('click', () => {
+                const selectedOption = document.querySelector('input[name="option"]:checked');
+                if (selectedOption) {
+                    userAnswers[currentQuestionIndex] = parseInt(selectedOption.value);
+                }
+            });
+
+            submitButton.addEventListener('click', submitQuiz);
+
+            // Start the timer and load the first question
+            startTimer();
+            loadQuestion();
+            updateButtons();
+        });
+    </script>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">LearnHub</div>
+        <div class="user-section">
+            <img src="user-icon.png" alt="User Icon">
+            <a href="signout.html">Sign Out</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <h1>Python Quiz</h1>
+    <div id="timer">Time Left: 5:00</div>
+    <div id="quiz-container">
+        <!-- Quiz questions will be dynamically loaded here -->
+        <div id="question"></div>
+    </div>
+    <div style="text-align: center;">
+        <button id="prev">Previous</button>
+        <button id="save">Save</button>
+        <button id="next">Next</button>
+        <button id="submit">Submit</button>
+    </div>
+
+</body>
+
+</html>

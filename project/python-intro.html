@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz - Introduction</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General Reset */
+        body,
+        h1,
+        h2,
+        h3,
+        p,
+        ul,
+        li,
+        a,
+        button {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        /* Body Styling */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        /* Navbar Styling */
+        .navbar {
+            background-color: #0056b3;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .user-section {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .user-section img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 10px;
+        }
+
+        .navbar .user-section a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 8px 12px;
+            background-color: #ff4c4c;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .navbar .user-section a:hover {
+            background-color: #e04343;
+        }
+
+        /* Main Content Styling */
+        .container {
+            background-color: white;
+            max-width: 800px;
+            margin: 30px auto;
+            padding: 20px 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .container h1 {
+            color: #0056b3;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .container h2,
+        .container h3 {
+            color: #0056b3;
+            margin-bottom: 15px;
+        }
+
+        .container ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .container ul li {
+            margin-bottom: 10px;
+            position: relative;
+        }
+
+        .container ul li:before {
+            content: "•";
+            color: #0056b3;
+            font-size: 20px;
+            position: absolute;
+            left: -20px;
+            top: 0;
+        }
+
+        .container button {
+            display: block;
+            margin: 20px auto 0;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: #0056b3;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .container button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">LearnHub</div>
+        <div class="user-section">
+            <img src="user-icon.png" alt="User Icon">
+            <a href="signout.html">Sign Out</a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <h1>Python Quiz</h1>
+        <h2>About the Quiz</h2>
+        <p>This quiz tests your knowledge of Python programming language, including basics, OOP, and advanced topics.
+        </p>
+
+        <h3>Question Types</h3>
+        <ul>
+            <li>Multiple Choice Questions (MCQs)</li>
+        </ul>
+
+        <h3>General Rules</h3>
+        <ul>
+            <li>Each question has one correct answer.</li>
+            <li>You will have 5 minutes to complete the quiz.</li>
+            <li>No re-attempts are allowed once the quiz begins.</li>
+        </ul>
+
+        <button id="start-button" onclick="startTest()">Start Test</button>
+    </div>
+
+    <script>
+        // Redirect to the actual quiz page
+        function startTest() {
+            window.location.href = 'python-quiz.html';
+        }
+    </script>
+
+</body>
+
+</html>

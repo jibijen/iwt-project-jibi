@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - LearnHub</title>
+    <link rel="stylesheet" href="styles.css">
+    <script>
+        function validateForm(event) {
+            event.preventDefault(); // Prevent form submission
+
+            const name = document.getElementById("name").value.trim();
+            const id = document.getElementById("id").value.trim();
+            const password = document.getElementById("password").value;
+            const email = document.getElementById("email").value.trim();
+            const age = document.getElementById("age").value.trim();
+            const gender = document.querySelector("input[name='gender']:checked");
+            const address = document.getElementById("address").value.trim();
+            const branch = document.getElementById("branch").value;
+            const skills = document.querySelectorAll("input[name='skills']:checked");
+            const resume = document.getElementById("resume").value;
+            const photo = document.getElementById("photo").value;
+
+            // Form validation
+            if (name === "" || id === "" || password === "" || email === "" || isNaN(age) || age === "" || !gender || address === "" || branch === "" || skills.length === 0 || resume === "" || photo === "") {
+                alert("Please fill in all required fields correctly.");
+                return false;
+            }
+
+            // Save user data in localStorage
+            localStorage.setItem('isLoggedIn', 'true');
+            localStorage.setItem('userName', name); // Save user's name
+
+            // Redirect to home page after successful registration
+            window.location.href = "index.html";
+        }
+    </script>
+</head>
+
+<body>
+
+    <div style="background-color: black;">
+        <!-- Registration Form -->
+        <div class="form-container">
+            <h2>Registration Form</h2>
+            <form onsubmit="validateForm(event)">
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="id">ID:</label>
+                <input type="text" id="id" name="id" required>
+
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" required>
+
+                <label for="email">E-Mail ID:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="age">Age:</label>
+                <input type="text" id="age" name="age" required>
+
+                <label>Gender:</label>
+                <div class="radio-group">
+                    <input type="radio" id="male" name="gender" value="male">
+                    <label for="male">Male</label>
+                    <input type="radio" id="female" name="gender" value="female">
+                    <label for="female">Female</label>
+                    <input type="radio" id="other" name="gender" value="other">
+                    <label for="other">Other</label>
+                </div>
+
+                <label for="address">College Address:</label>
+                <textarea id="address" name="address" rows="3"></textarea>
+
+                <label for="branch">Branch:</label>
+                <select id="branch" name="branch">
+                    <option value="cse">Computer Science</option>
+                    <option value="ece">Electronics and Communication</option>
+                    <option value="mech">Mechanical</option>
+                    <option value="civil">Civil</option>
+                </select>
+
+                <label>Technical Skills:</label>
+                <div class="checkbox-group">
+                    <input type="checkbox" id="c" name="skills" value="c">
+                    <label for="c">C</label>
+                    <input type="checkbox" id="java" name="skills" value="java">
+                    <label for="java">Java</label>
+                    <input type="checkbox" id="python" name="skills" value="python">
+                    <label for="python">Python</label>
+                    <input type="checkbox" id="jsp" name="skills" value="jsp">
+                    <label for="jsp">JSP</label>
+                </div>
+
+                <label for="resume">Upload Resume:</label>
+                <input type="file" id="resume" name="resume">
+
+                <label for="photo">Upload Photo:</label>
+                <input type="file" id="photo" name="photo">
+
+                <div class="button-group">
+                    <button type="submit">Submit</button>
+                    <button type="reset">Reset</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</body>
+
+</html>

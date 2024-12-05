@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wall</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
+        }
+
+        /* Navbar Styles */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #007BFF;
+            padding: 10px 20px;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .navbar .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-items {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .navbar .nav-items img {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .navbar .nav-items a {
+            text-decoration: none;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+        }
+
+        .navbar .nav-items a:hover {
+            text-decoration: underline;
+        }
+
+        .profile-container {
+            max-width: 700px;
+            margin: 50px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+        }
+
+        h1 {
+            text-align: center;
+            color: #444;
+        }
+
+        .profile-item {
+            margin: 15px 0;
+        }
+
+        .profile-item label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .profile-item input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+
+        .profile-item span {
+            display: inline-block;
+            margin-top: 5px;
+            font-size: 16px;
+        }
+
+        .buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 5px;
+            font-size: 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .edit-btn {
+            background-color: #5a67d8;
+            color: #fff;
+        }
+
+        .edit-btn:hover {
+            background-color: #434190;
+        }
+
+        .save-btn {
+            background-color: #4caf50;
+            color: #fff;
+        }
+
+        .save-btn:hover {
+            background-color: #388e3c;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">LearnHub</div>
+        <div class="nav-items">
+            <a href="#">Sign Out</a>
+            <img src="https://via.placeholder.com/30" alt="User Logo">
+        </div>
+    </div>
+
+    <!-- Profile Section -->
+    <div class="profile-container">
+        <h1>My Profile</h1>
+        <form id="profile-form">
+            <div class="profile-item">
+                <label for="name">Name:</label>
+                <span id="name-display">John Doe</span>
+                <input type="text" id="name" name="name" style="display: none;">
+            </div>
+
+            <div class="profile-item">
+                <label for="email">Email:</label>
+                <span id="email-display">john.doe@example.com</span>
+                <input type="email" id="email" name="email" style="display: none;">
+            </div>
+
+            <div class="profile-item">
+                <label for="fav-subject">Favourite Subject:</label>
+                <span id="fav-subject-display">Mathematics</span>
+                <input type="text" id="fav-subject" name="fav-subject" style="display: none;">
+            </div>
+
+            <div class="profile-item">
+                <label for="marks10">10th Marks:</label>
+                <span id="marks10-display">95%</span>
+                <input type="text" id="marks10" name="marks10" style="display: none;">
+            </div>
+
+            <div class="profile-item">
+                <label for="marks12">12th Marks:</label>
+                <span id="marks12-display">90%</span>
+                <input type="text" id="marks12" name="marks12" style="display: none;">
+            </div>
+
+            <div class="profile-item">
+                <label for="cgpa">CGPA:</label>
+                <span id="cgpa-display">9.2</span>
+                <input type="text" id="cgpa" name="cgpa" style="display: none;">
+            </div>
+
+            <div class="buttons">
+                <button type="button" class="edit-btn" id="edit-button">Edit</button>
+                <button type="submit" class="save-btn" id="save-button" style="display: none;">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        const editButton = document.getElementById('edit-button');
+        const saveButton = document.getElementById('save-button');
+        const form = document.getElementById('profile-form');
+        const inputs = form.querySelectorAll('input');
+        const spans = form.querySelectorAll('span');
+
+        editButton.addEventListener('click', () => {
+            // Switch to edit mode
+            spans.forEach(span => (span.style.display = 'none'));
+            inputs.forEach(input => (input.style.display = 'block'));
+            editButton.style.display = 'none';
+            saveButton.style.display = 'inline-block';
+        });
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Save changes
+            inputs.forEach(input => {
+                const span = document.getElementById(input.id + '-display');
+                span.textContent = input.value || span.textContent;
+                input.style.display = 'none';
+                span.style.display = 'inline-block';
+            });
+            editButton.style.display = 'inline-block';
+            saveButton.style.display = 'none';
+            alert('Profile updated successfully!');
+        });
+    </script>
+</body>
+
+</html>

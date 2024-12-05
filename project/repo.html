@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>E-Repository</title>
+  <link rel="stylesheet" href="repo.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>E-Repository</h1>
+      <p>Upload, share, and download documents easily.</p>
+    </div>
+
+    <div class="main-content">
+      <!-- Left Section: File Upload -->
+      <div class="upload-section">
+        <h2>Upload Your File</h2>
+        <input type="file" id="file-input" />
+        <button id="upload-btn">Upload</button>
+      </div>
+
+      <!-- Right Section: Uploaded Files List -->
+      <div class="file-list-section">
+        <h2>Uploaded Files</h2>
+        <div id="file-list" class="file-list">
+          <!-- File items will appear here -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="repo.js"></script>
+</body>
+</html>
